@@ -1,0 +1,2 @@
+class EnvVariables:
+    mongoUrl = 'MongoUrl'

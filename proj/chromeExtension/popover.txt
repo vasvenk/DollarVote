@@ -1,0 +1,7 @@
+<script>
+    $(function(){
+        $('.btn').click(function(){
+            $('#popover-target').popover({title: 'Title', content: 'Test Content', container: 'body', placement: 'right'});
+        });
+    });
+</script>
