@@ -1,12 +1,13 @@
 from proj.politics.Candidate import Candidate
-from proj.app import db
+from proj.utils.dbUtils import get_company_db
+
 
 class Company:
 
     def __init__(self, name):
-        self.companyId = db.get_company_db().size()
+        self.companyId = get_company_db().size()
         self.name = name
-        self.parents = []
+        self.parent = None
         self.candidates = []
         self.total = 0
 
@@ -18,10 +19,10 @@ class Company:
     def push_to_db(self):
         attrs = {'id': self.companyId,
                  'name': self.name,
-                 'parents': self.parents,
+                 'parent': self.parent,
                  'candidates': self.candidates,
                  'total': self.total}
-        db.get_company_db().update_one({'id': self.companyId}, {'$set': attrs})
+        get_company_db().update_one({'id': self.companyId}, {'$set': attrs})
 
     def issue_stance(self, issue_name):
         total = 0

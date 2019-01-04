@@ -1,5 +1,4 @@
-from proj.app import db
-from proj.constants.politicsConstants import Stances
+from proj.utils.dbUtils import get_candidate_db
 
 
 class Candidate:
@@ -13,30 +12,30 @@ class Candidate:
         issues. Migrate over to PostgreSQL to encode relation Company -> Candidate -> Stance.
     """
 
-    def __init__(self, last_name, first_name):
+    def __init__(self, name, open_secrets_id):
         # TODO: Add Code to add stances on different issues using VoteSmart API
-        self.id = db.get_candidate_db().count()
-        self.lastName = last_name
-        self.firstName = first_name
+        self.name = name
         self.stances = self.get_candidate_stances()
-        attrs = {'lastName': self.lastName,
-                 'firstName': self.firstName,
+        self.openSecretsId = open_secrets_id
+        attrs = {'openSecretsId': self.openSecretsId,
+                 'name': self.name,
                  'stances': self.stances}
-        db.get_candidate_db().insert_one(attrs)
+        get_candidate_db().insert_one(attrs)
 
     @staticmethod
-    def get_candidate_from_name(last_name, first_name):
-        return db.get_candidate_db().find_one({'firstName': first_name, 'lastName': last_name})
+    def get_candidate_from_name(name):
+        return get_candidate_db().find_one({'name': name})
 
     @staticmethod
     def get_candidate_from_id(candidate_id):
-        return db.get_candidate_db().find_one({'id': candidate_id})
+        return get_candidate_db().find_one({'openSecretsId': candidate_id})
 
     def push_to_db(self):
         pass
 
     def get_candidate_stances(self):
-        return self
+        # TODO: Finish this method by integrating with VoteSmart API
+        return {}
 
     def set_candidate(self, stances):
-        db.get_candidate_db().update_one({'id': self.id}, {'$set': stances})
+        get_candidate_db().update_one({'openSecretsId': self.openSecretsId}, {'$set': stances})

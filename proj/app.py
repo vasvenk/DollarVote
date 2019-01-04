@@ -1,7 +1,6 @@
 from flask import Flask, render_template
-import proj.utils.dbUtils as db
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 
 @app.route('/home', methods=['GET'])

@@ -1,11 +1,11 @@
-from proj.app import db
+from proj.utils.dbUtils import get_user_db
 from proj.constants.politicsConstants import Stances, Weights
 
 
 class User:
 
     def __init__(self, last_name, first_name, stances, weights):
-        self.id = db.get_user_db().count()
+        self.id = get_user_db().count()
         self.lastName = last_name
         self.firstName = first_name
         self.abortionStance = stances[Stances.abortion]
