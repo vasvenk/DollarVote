@@ -1,20 +1,17 @@
 {
  "manifest_version": 2,
- "name": "PurChoose",
- "description": "PurChoose informs of how your daily purchases impact causes you support.",
+ "name": "DollarVote",
+ "description": "DollarVote informs of how your daily purchases impact causes you support.",
  "version": "1",
  "author": "Vasudev",
 "browser_action": {
-   "default_icon": "tab-icon.png",
+   "default_icon": "logo_green.png",
    "default_title": "Vote Everyday!"
  },
- "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
  "content_scripts": [{
     "js": ["content.js"],
-    "matches": ["https://www.amazon.com/s/*"]
+    "matches": ["https://www.amazon.com/s/*", "https://www.amazon.com/s*"],
+    "all_frames": true
   }],
   "permissions": [
     "activeTab"
